@@ -64,19 +64,18 @@ function game(){
 
         ctx.fillRect(jejak[i].x*game_setmap, jejak[i].y*game_setmap, game_setmap-1, game_setmap-1);
         if(jejak[i].x == ular_x && jejak[i].y == ular_y){
-            ekor = 6;
+            ekor = 6; //panjang badan awal
         }
     }
 
     jejak.push({x:ular_x, y:ular_y});
     while(jejak.length>ekor){
         jejak.shift();
-        score.innerText = ekor.length;
     }
 
     if(buah_x==ular_x && buah_y==ular_y){ //ketika ular nabrak buah
         ekor++;
-        // score = ekor.length;
+        score.innerText = ekor.length; //score
         buah_x = Math.floor(Math.random()*ujung_map);
         buah_y = Math.floor(Math.random()*ujung_map);
     }
@@ -89,9 +88,13 @@ function game(){
     ctx.fillStyle = "rgba(255,255,255,.7)"; //warna buah
     ctx.fillRect(buah_x*game_setmap, buah_y*game_setmap, game_setmap-1, game_setmap-1); //pembatas muncul buah
 
-    
-let waktu = document.getElementById('waktu');
-waktu.innerText= "Tes Waktu";
-    
 }
+
+//Waktu
+var sec = 0;
+function pad ( val ) { return val > 9 ? val : "0" + val; }
+setInterval( function(){
+    document.getElementById("seconds").innerHTML=pad(++sec%60);
+    document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+}, 1000);
 
